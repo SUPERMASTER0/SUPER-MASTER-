@@ -9,14 +9,16 @@ const bot = new TelegramBot(token, { polling: true });
 
 // 📢 YOUR CHANNELS
 const CHANNELS = [
-  "@URVIGAMER",
+  "@Dnexon55Pros",
+  "@RDX_Bunnyamia56591",
   "@Supermastertrick",
-  "@Raja_Game_bunny"
+  "@Raja_Game_bunny",
+  "@URVIGAMER"
 ];
 
-// 🔥 TELEKART SMM PANEL (YOUR CONFIG)
+// 🔥 TELEKARTSMM PANEL (YOUR CONFIG)
 const ACTIVE_PANEL = {
-  name: "telekartsmm",
+  name: "telekatsmm",
   url: "https://telekartsmm.com/api/v2",
   key: process.env.API_KEY,
   service: "1023"
@@ -63,18 +65,18 @@ bot.on("channel_post", async (msg) => {
     // ❌ Ignore unknown channels
     if (!CHANNELS.includes(username)) return;
 
-    const uniqueKey = `${username}_${msg.message_id}`;
+    const uniqueKey = ${username}_${msg.message_id};
 
     if (processed.has(uniqueKey)) return;
     processed.add(uniqueKey);
 
     // 🔗 Correct link format
-    const link = `https://t.me/${username.replace("@", "")}/${msg.message_id}`;
+    const link = https://t.me/${username.replace("@", "")}/${msg.message_id};
 
     console.log("📢 New Post Detected:", link);
 
     // ⚡ SAFE TEST MODE (ONLY ONE ORDER FIRST)
-    const burst = [1200];
+    const burst = [1620 , 1230 , 1803];
 
     for (let qty of burst) {
       await sendOrder(link, qty);
