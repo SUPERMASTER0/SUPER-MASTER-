@@ -7,7 +7,7 @@ console.log("🚀 Bot Started");
 const token = process.env.BOT_TOKEN;
 const bot = new TelegramBot(token, { polling: true });
 
-// 📢 YOUR CHANNELS
+// 📢 CHANNELS
 const CHANNELS = [
   "@Dnexon55Pros",
   "@RDX_Bunnyamia56591",
@@ -16,25 +16,22 @@ const CHANNELS = [
   "@URVIGAMER"
 ];
 
-// 🔥 TELEKARTSMM PANEL (YOUR CONFIG)
-const ACTIVE_PANEL = {
-  name: "telekatsmm",
+// 🔥 TELEKART PANEL
+const PANEL = {
   url: "https://telekartsmm.com/api/v2",
   key: process.env.API_KEY,
-  service: "1023"
+  service: "1023" // ⚠️ apna correct service ID daalo
 };
 
-// 📦 SEND ORDER FUNCTION
+// 📦 SEND ORDER
 async function sendOrder(link, quantity) {
   try {
-    console.log("👉 Sending Link:", link);
-    console.log("👉 Service:", ACTIVE_PANEL.service);
-    console.log("👉 Quantity:", quantity);
+    console.log("👉 Sending:", link);
 
-    const res = await axios.post(ACTIVE_PANEL.url, {
-      key: ACTIVE_PANEL.key,
+    const res = await axios.post(PANEL.url, {
+      key: PANEL.key,
       action: "add",
-      service: ACTIVE_PANEL.service,
+      service: PANEL.service,
       link: link,
       quantity: quantity
     });
@@ -42,8 +39,7 @@ async function sendOrder(link, quantity) {
     console.log("👉 API Response:", res.data);
 
     if (res.data && res.data.order) {
-      console.log("✅ Order Success ID:", res.data.order);
-      return true;
+      console.log("✅ Order Success:", res.data.order);
     } else {
       console.log("❌ Order Failed");
     }
@@ -51,37 +47,28 @@ async function sendOrder(link, quantity) {
   } catch (err) {
     console.log("❌ Error:", err.message);
   }
-  return false;
 }
 
-// 🧠 DUPLICATE PROTECTION (FIXED)
+// 🧠 DUPLICATE PROTECTION
 let processed = new Set();
 
-// 📩 CHANNEL POST LISTENER
+// 📩 LISTENER
 bot.on("channel_post", async (msg) => {
   try {
     const username = msg.chat.username ? "@" + msg.chat.username : null;
 
-    // ❌ Ignore unknown channels
     if (!CHANNELS.includes(username)) return;
 
     const uniqueKey = ${username}_${msg.message_id};
-
     if (processed.has(uniqueKey)) return;
     processed.add(uniqueKey);
 
-    // 🔗 Correct link format
     const link = https://t.me/${username.replace("@", "")}/${msg.message_id};
 
-    console.log("📢 New Post Detected:", link);
+    console.log("📢 New Post:", link);
 
-    // ⚡ SAFE TEST MODE (ONLY ONE ORDER FIRST)
-    const burst = [1620];
-
-    for (let qty of burst) {
-      await sendOrder(link, qty);
-      await new Promise(r => setTimeout(r, 30000)); // 30 sec delay
-    }
+    // ⚡ SINGLE SAFE ORDER (test)
+    await sendOrder(link, 100);
 
   } catch (err) {
     console.log("❌ Error:", err.message);
