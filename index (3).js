@@ -9,17 +9,17 @@ const bot = new TelegramBot(token, { polling: true });
 
 // 📢 YOUR CHANNELS
 const CHANNELS = [
-  "@Dnexon55Pros",
-  "@Godgamerislive",
-  "@trickyearnerislive"
+  "@URVIGAMER",
+  "@Supermastertrick",
+  "@Raja_Game_bunny"
 ];
 
-// 🔥 SMMLITE PANEL (YOUR CONFIG)
+// 🔥 TELEKART SMM PANEL (YOUR CONFIG)
 const ACTIVE_PANEL = {
-  name: "SMMLite",
-  url: "https://smmlite.com/api/v2",
+  name: "telekartsmm",
+  url: "https://telekartsmm.com/api/v2",
   key: process.env.API_KEY,
-  service: "5160"
+  service: "1023"
 };
 
 // 📦 SEND ORDER FUNCTION
